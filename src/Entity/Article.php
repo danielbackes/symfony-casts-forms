@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -95,7 +94,6 @@ class Article
         return $this;
     }
 
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -130,6 +128,11 @@ class Article
         $this->publishedAt = $publishedAt;
 
         return $this;
+    }
+
+    public function isPublished(): bool
+    {
+        return null !== $this->publishedAt;
     }
 
     public function getHeartCount(): ?int
