@@ -32,7 +32,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups("main")
      */
     private $firstName;
@@ -62,6 +62,11 @@ class User implements UserInterface
     {
         $this->apiTokens = new ArrayCollection();
         $this->articles = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getFirstName();
     }
 
     public function getId(): ?int
@@ -178,7 +183,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|ApiToken[]
+     * @return ApiToken[]|Collection
      */
     public function getApiTokens(): Collection
     {
@@ -209,7 +214,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Article[]
+     * @return Article[]|Collection
      */
     public function getArticles(): Collection
     {
@@ -237,10 +242,5 @@ class User implements UserInterface
         }
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getFirstName();
     }
 }
